@@ -65,7 +65,7 @@ If the result number is greater than a set threshold, while the student's skills
 
 Alternatively, the committee can choose to pick an internship for an intern that matches his preferred location of doing an internship, given that the skills requirements of the position are again fulfilled. The committee can also view positions that satisfy both the student's interests and preferred location criteria.
 
-The same logic is applied when assigning a supervisor to an internship. In this case, the app uses the supervisor's interests. Otherwise, the committee can choose to assign the supervisor with the less 'load', i.e. that supervises the least number of internships.
+The same logic is applied when assigning a supervisor to an internship. In this case, the app uses the supervisor's interests. Otherwise, the committee can choose to assign the supervisor with the smallest 'load', i.e. that supervises the least number of internships among the other supervisors.
 
 ---
 
