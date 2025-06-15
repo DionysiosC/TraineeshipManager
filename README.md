@@ -1,5 +1,15 @@
 #  Traineeship Management Web App
 
+# Table of Contents
+
+1. [Introduction](#introduction)  
+2. [Development](#development)  
+   - [Maven Dependencies](#maven-dependencies)  
+3. [Usage Overview](#usage-overview)  
+4. [Assignment Logic](#assignment-logic)  
+5. [Testing & Final Notes](#testing--final-notes)  
+6. [Instructions](#instructions)
+
 ##  Introduction
 This is a full-stack web application for managing university internships (traineeships). The main users are:
 - **Committee members** (assign and finalize internships)
