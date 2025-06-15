@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Update profile</title>
+</head>
+
+<body>
+	
+	<div class="container">
+	
+		<h3>Profile information</h3>
+		<hr>
+		
+		<p class="h4 mb-4">Update profile</p>
+	
+		<form action="#" th:action="@{/company/save}" th:object="${company}" method="POST">
+		
+			<!-- Add hidden form field to prepopulate form -->
+			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{username}" />
+			<input type="hidden" th:field="*{password}" />	
+			<input type="hidden" th:field="*{role}" />	
+
+			<input type="text" th:field="*{companyName}" class="form-control mb-4 col-8" placeholder="Company Name">
+            <input type="text" th:field="*{companyLocation}" class="form-control mb-4 col-8" placeholder="Location">
+			<button type="submit" class="btn btn-info col-2">Save</button>		
+			
+			<div th:if="${param.error}" class="error-message">
+                <p>Error</p>
+            </div>
+            <div th:utext="${successMessage}" class="success-message"></div>
+            
+		</form>
+	
+		<hr>
+		<a th:href="@{/company/dashboard}" class="btn btn-danger btn-sm mb-3">Back to company dashboard</a>
+		
+	</div>
+
+</body>
+
+</html>

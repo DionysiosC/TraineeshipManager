@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <title>Find Matching Positions</title>
+</head>
+<body>
+
+<div class="container mt-4">
+
+    <!-- Check if positions are available and show them -->
+    <div th:if="${positions != null and positions.size() > 0}">
+        
+        <h5>Matching Positions:</h5>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Position Title</th>
+                    <th>Required Skills</th>
+                    <th>Location</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="position : ${positions}">
+                    <td th:text="${position.title}"></td>
+                    <td th:text="${position.skills}"></td>
+                    <td th:text = "${position.company.companyLocation}"></td>
+                    <td>
+                        <a th:href="@{/committee/assign-student(positionId=${position.id}, applicantUsername=${param.applicantUsername})}"
+                           class="btn btn-info btn-sm">Assign This Position
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- If no positions are found, show this message -->
+    <div th:if="${positions == null or positions.size() == 0}">
+        <p>No matching positions found based on the selected criteria.</p>
+    </div>
+
+    <hr>
+
+    <a th:href="@{/committee/candidates}" class="btn btn-danger btn-sm">Back to Candidates List</a>
+
+</div>
+
+</body>
+</html>

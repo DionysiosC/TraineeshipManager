@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom styles -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        h2 {
+            color: #343a40;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        h4 {
+            color: #495057;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .btn {
+            font-size: 1rem;
+            padding: 10px 20px;
+            margin: 5px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #bd2130;
+        }
+
+        .auth-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .auth-buttons a {
+            width: 160px;
+            text-align: center;
+        }
+
+        .user-info {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .auth-section {
+            margin-top: 20px;
+        }
+    </style>
+
+    <title>Homepage</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Welcome to the Traineeship Management Application</h2>
+
+        <div class="auth-section">
+            <div sec:authorize="hasRole('ROLE_ANONYMOUS')" class="auth-buttons">
+                <a th:href="@{/login}" class="btn btn-primary btn-sm mb-3" th:text="Login"></a>
+                <a th:href="@{/register}" class="btn btn-primary btn-sm mb-3" th:text="Register"></a>
+            </div>
+
+            <div sec:authorize="isAuthenticated()" class="user-info">
+                <h4>Logged as: <span sec:authentication="name"></span></h4>
+                <h4>Has role: <span sec:authentication="authorities"></span></h4>
+
+                <div class="auth-buttons">
+                    <p sec:authorize="hasAuthority('STUDENT')">
+                        <a th:href="@{/student/dashboard}" class="btn btn-primary btn-sm mb-3">Student Dashboard</a>
+                        <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
+                    </p>
+
+                    <p sec:authorize="hasAuthority('PROFESSOR')">
+                        <a th:href="@{/professor/dashboard}" class="btn btn-primary btn-sm mb-3">Professor Dashboard</a>
+                        <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
+                    </p>
+
+                    <p sec:authorize="hasAuthority('COMPANY')">
+                        <a th:href="@{/company/dashboard}" class="btn btn-primary btn-sm mb-3">Company Dashboard</a>
+                        <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
+                    </p>
+                    
+                    <p sec:authorize="hasAuthority('COMMITTEE')">
+                        <a th:href="@{/committee/dashboard}" class="btn btn-primary btn-sm mb-3">Committee Dashboard</a>
+                        <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

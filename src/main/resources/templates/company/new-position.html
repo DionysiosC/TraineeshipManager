@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Add subject</title>
+</head>
+
+<body>
+	
+	<div class="container">
+	
+		<h3>Announce a New Traineeship Position</h3>
+		<hr>
+
+		<p class="h4 mb-4">New traineeship position details</p>
+	
+        <form action="#" th:action="@{/company/save-position}" th:object="${traineeshipPosition}" method="POST">
+                            
+            <input type="hidden" th:field="*{id}">
+
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" id="title" th:field="*{title}" class="form-control" placeholder="Enter position title" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" th:field="*{description}" class="form-control" rows="3" placeholder="Enter description" required></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="fromDate">Start Date</label>
+                    <input type="date" id="fromDate" th:field="*{fromDate}" class="form-control" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="toDate">End Date</label>
+                    <input type="date" id="toDate" th:field="*{toDate}" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="topics">Topics</label>
+                <textarea id="topics" th:field="*{topics}" class="form-control" rows="2" placeholder="Enter topics covered"></textarea>
+            </div>
+
+            <div cla    ss="form-group">
+                <label for="skills">Skills Required</label>
+                <textarea id="skills" th:field="*{skills}" class="form-control" rows="2" placeholder="Enter required skills"></textarea>
+            </div>
+            
+            <div th:if="${param.error}" class="error-message text-center">
+                <p>Error: Unable to save traineeship position.</p>
+            </div>
+            <div th:if="${successMessage}" th:text="${successMessage}" class="success-message text-center"></div>
+            
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success btn-lg">Save Position</button>
+            </div>
+        </form>
+	
+		<hr>
+		<a th:href="@{/company/available-positions}" class="btn btn-danger btn-sm mb-3">Back to available positions</a>	
+		
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Assigned Positions list</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Assigned Positions list</h3>
+    <hr>
+        
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Student name</th>
+                <th>Description</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr th:each="position : ${positions}">
+                <td th:text="${position.id}"></td>
+                <td th:text="${position.title}"></td>
+                <td th:text="${position.student.studentName}"></td>
+                <td th:text="${position.description}"></td>
+                <td th:text="${position.fromDate}"></td>
+                <td th:text="${position.toDate}"></td>
+                
+                
+                <td>
+                    <!-- View Applications (or similar actions for company)
+                    <a th:href="@{/company/add-position(positionId=${position.id})}"
+                       class="btn btn-info btn-sm">
+                        Edit
+                    </a> -->
+
+                    <a th:href="@{/company/evaluate-position(positionId=${position.id})}"
+                       class="btn btn-info btn-sm"
+                       >
+                        Evaluate
+                    </a>
+                </td>
+                
+            </tr>
+        </tbody>        
+    </table>
+
+    <hr>
+    <a th:href="@{/company/dashboard}" class="btn btn-danger btn-sm mb-3">Back to company dashboard</a>  
+
+</div>
+    
+</body>
+</html>

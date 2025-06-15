@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+          crossorigin="anonymous">
+
+    <title>Evaluate Position</title>
+</head>
+
+<body>
+
+<div class="container">
+    <h3>Evaluate Position (Id: <span th:text="${positionId}"></span>)</h3>
+    <hr>
+    
+    <form th:action="@{/company/save-evaluation}" th:object="${evaluation}" method="post">
+        <input type="hidden" th:name="positionId" th:value="${positionId}" />
+        
+        <div class="form-group">
+            <label for="motivation">Student Motivation (1-5)</label>
+            <input type="number" th:field="*{motivation}" class="form-control" id="motivation" min="1" max="5" placeholder="Enter a number between 1(bad) and 5(perfect)" required>
+        </div>
+
+        <div class="form-group">
+            <label for="effectiveness">Effectiveness (1-5)</label>
+            <input type="number" th:field="*{effectiveness}" class="form-control" id="effectiveness" min="1" max="5" placeholder="Enter a number between 1(bad) and 5(perfect)" required>
+        </div>
+
+        <div class="form-group">
+            <label for="efficiency">Efficiency (1-5)</label>
+            <input type="number" th:field="*{efficiency}" class="form-control" id="efficiency" min="1" max="5" placeholder="Enter a number between 1(bad) and 5(perfect)" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a th:href="@{/company/assigned-positions}" class="btn btn-secondary">Back to Assigned Positions</a>
+    </form>
+
+</div>
+
+</body>
+</html>

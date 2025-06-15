@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Traineeship Candidates List</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Traineeship Candidates List</h3>
+    <hr>
+         
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Full Name</th>
+                <th>AM</th>
+                <th>Skills</th>
+                <th>Interests</th>
+                <th>Preferred Location</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr th:each="candidate : ${candidates}">
+                <input type="hidden" name="applicantUsername" th:value="${candidate.username}" />
+                <td th:text="${candidate.studentName}"></td>
+                <td th:text="${candidate.AM}"></td>
+                <td th:text="${candidate.skills}"></td>
+                <td th:text="${candidate.interests}"></td>
+                <td th:text="${candidate.preferredLocation}"></td>
+                <td>
+                    <!-- Dropdown for selecting action -->
+                    <form th:action="@{/committee/search-position}" method="get">
+                        <input type="hidden" name="applicantUsername" th:value="${candidate.username}" />
+
+                        <select class="custom-select" name="strategy" required>
+                            <option value="" disabled selected>Select an action</option>
+                            <option value="location">Search for Positions based on Preferred Location</option>
+                            <option value="interests">Search for Positions based on Interests</option>
+                            <option value="both">Search for Positions based on Preferred Location and Interests</option>
+                        </select>
+                        
+                        <br><br>
+                        <button type="submit" class="btn btn-info btn-sm">Search</button>
+                    </form>
+                </td>                
+            </tr>
+        </tbody>        
+    </table>
+    
+	<span th:utext="${successMessage}"></span>
+
+    <hr>
+    <a th:href="@{/committee/dashboard}" class="btn btn-danger btn-sm mb-3">Back to committee dashboard</a>  
+
+</div>
+    
+</body>
+</html>

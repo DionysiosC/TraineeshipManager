@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+	<title>Student Dashboard</title>
+</head>
+
+<body>
+<div class="container">
+
+  <h2>Welcome to Student Dashboard</h2>
+  
+  <br> <br> <hr> <br> <br>
+  
+  <h4>Logged as: <span sec:authentication="name"></span></h4>
+  <h4>Has role: <span sec:authentication="authorities"></span></h4>
+
+	<br> <br> <hr> <br> <br>
+
+    <p>
+    	<a th:href="@{/}" class="btn btn-success btn-sm mb-3">Home</a>
+    	<a th:href="@{/student/profile}" class="btn btn-primary btn-sm mb-3">Profile</a>
+        <a th:if="${student.assignedTraineeship != null}" th:href="@{/student/logbook}" class="btn btn-primary btn-sm mb-3">
+            Fill Logbook
+        </a>
+        
+        <a th:if="${student.assignedTraineeship == null}" class="btn btn-secondary btn-sm mb-3 disabled" aria-disabled="true">
+            Fill Logbook
+        </a>
+    	
+    	<a th:if="${student.assignedTraineeship != null}" class="btn btn-secondary btn-sm mb-3 disabled" aria-disabled="true">
+            Traineeship Assigned (Cannot Apply)
+        </a>
+          
+        <a th:if="${student.assignedTraineeship == null}" th:href="@{/student/apply}" 
+            th:classappend="${student.lookingForTraineeship} ? 'btn-danger' : 'btn-primary'"
+            class="btn btn-sm mb-3">
+            <span th:text="${student.lookingForTraineeship} ? 'Cancel application' : 'Apply for a traineeship position'"></span>
+        </a>
+    </p>
+
+	<br><br>
+
+	<span th:utext="${successMessage}"></span>
+
+</div>
+</body>
+
+</html>

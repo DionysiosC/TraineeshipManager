@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Assigned Positions list</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Assigned Positions list</h3>
+    <hr>
+        
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Student name</th>
+                <th>Supervisor</th>
+                <th>From Date</th>
+                <th>To Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr th:each="position : ${positions}">
+                <td th:text="${position.title}"></td>
+                <td th:text="${position.description}"></td>
+                <td th:text="${position.student.studentName}"></td>
+                <td th:text="${position.supervisor != null ? position.supervisor.professorName : 'Unassigned'}"></td>
+                <td th:text="${position.fromDate}"></td>
+                <td th:text="${position.toDate}"></td>
+                
+                
+                <td>
+                    <a th:href="@{/committee/finalize-position(positionId=${position.id})}"
+                       class="btn btn-info btn-sm"
+                       >
+                        Finalize
+                    </a>
+                    <br> <br>
+                    <!-- Dropdown for selecting action -->
+                    <form th:if="${position.supervisor == null}" th:action="@{/committee/assign-supervisor}" method="get">
+                        <input type="hidden" name="positionId" th:value="${position.id}" />
+
+                        <select class="custom-select" name="strategy" required>
+                            <option value="" disabled selected>Select an action</option>
+                            <option value="load">Assign a professor based on Load</option>
+                            <option value="interests">Assign a professor based on on Interests</option>
+                        </select>
+                        
+                        <br><br>
+                        <button type="submit" class="btn btn-info btn-sm">Assign</button>
+                    </form>
+                </td>
+                
+            </tr>
+        </tbody>        
+    </table>
+
+    <hr>
+    <a th:href="@{/committee/dashboard}" class="btn btn-danger btn-sm mb-3">Back to committee dashboard</a>  
+
+</div>
+    
+</body>
+</html>
